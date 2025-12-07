@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 
 export const metadata: Metadata = {
   title: "Notably",
@@ -24,7 +24,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="min-h-screen">
+          <main>
             {children}
             <Toaster />
           </main>
