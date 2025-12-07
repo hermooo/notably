@@ -43,7 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-@layer base {
+/* @layer base {
   main {
     @apply mx-auto container flex flex-col sm:px-10 px-5 py-10;
   }
@@ -55,7 +55,7 @@
   h3 {
     @apply text-2xl font-bold;
   }
-}
+} */
 
 :root {
   --radius: 0.625rem;
