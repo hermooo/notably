@@ -1,8 +1,8 @@
-import { SignupForm } from "@/components/auth/signup-form";
+import { SignupForm } from "./signup-form";
 
-export default function Page() {
+export default function SignupPage() {
   return (
-    <div className="flex h-full w-full items-center justify-center p-6 md:p-10">
+    <div className="flex h-screen w-full items-center justify-center p-6 pt-20">
       <div className="w-full max-w-sm">
         <SignupForm />
       </div>
