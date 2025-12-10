@@ -17,8 +17,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       </CardHeader>
       <CardContent>
         <form>
-          <FieldGroup>
-            <Field>
+          <FieldGroup className="gap-4">
+            <Field className="gap-1">
               <FieldLabel htmlFor="name">Full Name</FieldLabel>
               <Input
                 id="name"
@@ -27,7 +27,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 required
               />
             </Field>
-            <Field>
+            <Field className="gap-1">
               <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
                 id="email"
@@ -36,7 +36,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 required
               />
             </Field>
-            <Field>
+            <Field className="gap-1">
               <FieldLabel htmlFor="password">Password</FieldLabel>
               <Input
                 id="password"
@@ -44,11 +44,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 placeholder="Enter your password"
                 required
               />
-              <FieldDescription>
+              <FieldDescription className="text-muted-foreground text-xs">
                 Must be at least 8 characters long.
               </FieldDescription>
             </Field>
-            <Field>
+            <Field className="gap-1">
               <FieldLabel htmlFor="confirm-password">
                 Confirm Password
               </FieldLabel>
@@ -58,7 +58,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 placeholder="Enter your password again"
                 required
               />
-              <FieldDescription>Please confirm your password.</FieldDescription>
+              <FieldDescription className="text-muted-foreground text-xs">
+                Please confirm your password.
+              </FieldDescription>
             </Field>
             <FieldGroup>
               <Field>
