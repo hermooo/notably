@@ -17,18 +17,44 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Loader2 } from "lucide-react";
+import { loginUser } from "@/actions/auth.action";
+import { toast } from "sonner";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Login");
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    startTransition(async () => {
+      const { email, password } = formData;
+
+      const { error, message } = await loginUser(email, password);
+
+      if (error) {
+        toast.error(message);
+        setFormData((prev) => ({ ...prev, password: "" }));
+        return;
+      }
+
+      toast.success(message);
+      setFormData({ email: "", password: "" });
+    });
   };
 
   return (
@@ -47,8 +73,11 @@ export function LoginForm({
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
                 />
               </Field>
@@ -64,14 +93,22 @@ export function LoginForm({
                 </div>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
                   placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={handleInputChange}
                   required
                 />
               </Field>
               <Field>
                 <Button type="submit" disabled={isPending}>
-                  {isPending ? <Loader2 className="animate-spin" /> : "Login"}
+                  {isPending ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    ""
+                  )}
+                  Login
                 </Button>
                 <FieldDescription className="text-center">
                   Don&apos;t have an account?{" "}
