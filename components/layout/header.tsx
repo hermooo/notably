@@ -2,12 +2,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/theme/theme-toggle";
 import LogoutButton from "./logout-button";
+import { cn } from "@/lib/utils";
 
-export default function Header() {
+export default function Header({ className }: { className?: string }) {
   const user = null;
 
   return (
-    <header className="bg-popover flex h-20 items-center justify-between border px-3 sm:px-8">
+    <header
+      className={cn(
+        "f bg-popover flex h-20 items-center justify-between border px-3 sm:px-8",
+        className,
+      )}
+    >
       <Link href="/" className="text-3xl font-bold">
         Notably
       </Link>
