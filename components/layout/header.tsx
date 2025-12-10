@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/theme/theme-toggle";
 import LogoutButton from "./logout-button";
 import { cn } from "@/lib/utils";
+import { getUser } from "@/lib/supabase/server";
 
-export default function Header({ className }: { className?: string }) {
-  const user = null;
+export default async function Header({ className }: { className?: string }) {
+  const user = await getUser();
 
   return (
     <header
