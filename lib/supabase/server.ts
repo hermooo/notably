@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 export async function createClient() {
   const cookieStore = await cookies();
 
-  return createServerClient(
+  const client = createServerClient(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_PUBLISHABLE_KEY!,
     {
@@ -17,13 +17,24 @@ export async function createClient() {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options),
             );
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
+          } catch {}
         },
       },
     },
   );
+
+  return client;
 }
+
+export const getUser = async () => {
+  const { auth } = await createClient();
+
+  const userObject = await auth.getUser();
+
+  if (userObject.error) {
+    console.error(userObject.error);
+    return null;
+  }
+
+  return userObject.data.user;
+};
